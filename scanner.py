@@ -1,6 +1,5 @@
 import os
 import re
-import csv
 
 # Function to split input into tokens
 def getTokens (text,tokens_reg):
@@ -27,7 +26,7 @@ inputWithoutComments = re.sub(r'{.*}',"",myFileText)
 inputWithoutComments_andWithoutNewLines = inputWithoutComments.strip('\n')
 
 # Expression to Parse input into tokens
-tokens_reg = '(\:=|\*|\+|\-|\;|\(|\)|\/|\>=|\!=|\==|\=|\>|\<=|\<|[a-zA-z_$][a-zA-Z_0-9$]*|[0-9]+)'
+tokens_reg = '(\:=|\*|\+|\-|\;|\(|\)|\/|\>=|\!=|\==|\=|\>|\<=|\<|[a-zA-z_$][a-zA-Z_0-9$]*|[0-9][[\.][0-9]+]?|[0-9]+)'
 # Lists of reserved words, special symbols
 reserved_words = ['if','then','else','repeat','until','end','read','write']
 special_symbols = ['=','<','<=','>','>=',':=','+','-','*','/',';','==','!=']

@@ -1,10 +1,12 @@
 import os
 import re
 
+
 # Function to split input into tokens
-def getTokens (text,tokens_reg):
-    tokens = re.findall(tokens_reg,text)
+def getTokens (text, tokens_reg):
+    tokens = re.findall(tokens_reg, text)
     return tokens
+
 
 def checkOthers(token,variable_or_reserved_regex):
     regexp = re.compile(variable_or_reserved_regex)
@@ -20,8 +22,8 @@ openFile = open(filePath,mode)
 myFileText = openFile.read()
 openFile.close()
 
-# Removing the omments between {}
-inputWithoutComments = re.sub(r'{.*}',"",myFileText)
+# Removing the comments between {}
+inputWithoutComments = re.sub(r'{.*}', '', myFileText)
 # Removing Blank Lines
 inputWithoutComments_andWithoutNewLines = inputWithoutComments.strip('\n')
 
@@ -29,11 +31,11 @@ inputWithoutComments_andWithoutNewLines = inputWithoutComments.strip('\n')
 tokens_reg = '(\:=|\*|\+|\-|\;|\(|\)|\/|\>=|\!=|\==|\=|\>|\<=|\<|[a-zA-z_$][a-zA-Z_0-9$]*|[0-9][[\.][0-9]+]?|[0-9]+)'
 # Lists of reserved words, special symbols
 reserved_words = ['if','then','else','repeat','until','end','read','write']
-special_symbols = ['=','<','<=','>','>=',':=','+','-','*','/',';','==','!=']
+special_symbols = ['=', '<', '<=', '>', '>=', ':=', '+', '-', '*', '/', ';', '==', '!=']
 # Used in check others function to diff. between variable names and reserved words
 variable_or_reserved_regex = "[a-zA-z_$][a-zA-Z_0-9$]*"
 
-tokens = getTokens(inputWithoutComments_andWithoutNewLines,tokens_reg)
+tokens = getTokens(inputWithoutComments_andWithoutNewLines, tokens_reg)
 #print(tokens)
 
 Dict = {}
@@ -42,7 +44,7 @@ for token in tokens:
         Dict[token] = "Reserved Word"
     elif token in special_symbols:
         Dict[token] = "Special Symbol"
-    elif checkOthers(token,variable_or_reserved_regex):
+    elif checkOthers(token, variable_or_reserved_regex):
         Dict[token] = "Identifier"
     else:
         Dict[token] = "Number"
